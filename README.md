@@ -35,3 +35,7 @@ Contributions are welcome! If you'd like to contribute to this project, feel fre
 ## License
 
 This project is licensed under the [Doston Sulaymon]().
+
+## Problem
+
+Put method isn't working properly, later I should fix it.

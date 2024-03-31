@@ -1,6 +1,7 @@
 package doston.uz.demo.student;
 
 import jakarta.transaction.Transactional;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,9 @@ public class StudentController {
     }
 
     @PostMapping
-    public void registerNewStudent(@RequestBody Student student) {
-        studentService.addNewStudent(student);
+    public String registerNewStudent(@RequestBody Student student) {
+        return studentService.addNewStudent(student);
+//        return "Student has been added";
 
     }
 
@@ -37,11 +39,12 @@ public class StudentController {
     }
 
     @PutMapping(path = "{studentId}")
-    public void updateStudent(
+    public String updateStudent(
             @PathVariable("studentId") Long studentId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email) {
-        studentService.updateStudent(studentId, name, email);
+            @RequestBody(required = false) Student updateStudentDto
+          ) throws BadRequestException {
+        System.out.printf("Student %s",updateStudentDto);
+      return studentService.updateStudent(studentId, updateStudentDto);
     }
 
 
